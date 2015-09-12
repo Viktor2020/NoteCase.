@@ -1,4 +1,4 @@
-package student.ppjava13v1.itstep.notecase;
+package student.ppjava13v1.itstep.notecase.fragments;
 
 
 import android.os.AsyncTask;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.concurrent.TimeUnit;
+
+import student.ppjava13v1.itstep.notecase.R;
 
 
 /**

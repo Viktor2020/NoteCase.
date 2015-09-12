@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
-    tools:context="student.ppjava13v1.itstep.notecase.fragments.SplashFragment">
+    tools:context="student.ppjava13v1.itstep.notecase.fragments.CurrentTaskFragment">
 
-    <ImageView
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Current tasks"
         android:layout_gravity="center"
-        android:src="@drawable/splash"
-        android:contentDescription="@string/desc_splash" />
+        android:textSize="35sp"/>
 
 </FrameLayout>
