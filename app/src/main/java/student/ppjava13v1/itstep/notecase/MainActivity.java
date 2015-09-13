@@ -1,19 +1,24 @@
 package student.ppjava13v1.itstep.notecase;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import student.ppjava13v1.itstep.notecase.adapter.TabAdapter;
+import student.ppjava13v1.itstep.notecase.dialog.AddingTaskDialogFragment;
 import student.ppjava13v1.itstep.notecase.fragments.SplashFragment;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements AddingTaskDialogFragment.AddingTaskListener {
 
 
     FragmentManager fragmentManager;
@@ -104,5 +109,24 @@ public class MainActivity extends Activity {
             }
         });
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment addingTaskDialogFragment = new AddingTaskDialogFragment();
+                addingTaskDialogFragment.show(fragmentManager, "AddingTaskDialogFragment");
+            }
+        });
+
+    }
+
+    @Override
+    public void onTaskAdded() {
+        Toast.makeText(this, "Task added.",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onTaskAddingCancel() {
+        Toast.makeText(this, "Task adding cencel.", Toast.LENGTH_LONG).show();
     }
 }
