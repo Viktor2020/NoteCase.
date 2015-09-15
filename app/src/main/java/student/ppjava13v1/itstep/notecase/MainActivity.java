@@ -15,7 +15,10 @@ import android.widget.Toast;
 
 import student.ppjava13v1.itstep.notecase.adapter.TabAdapter;
 import student.ppjava13v1.itstep.notecase.dialog.AddingTaskDialogFragment;
+import student.ppjava13v1.itstep.notecase.fragments.CurrentTaskFragment;
+import student.ppjava13v1.itstep.notecase.fragments.DoneTaskFragment;
 import student.ppjava13v1.itstep.notecase.fragments.SplashFragment;
+import student.ppjava13v1.itstep.notecase.model.ModelTask;
 
 
 public class MainActivity extends Activity implements AddingTaskDialogFragment.AddingTaskListener {
@@ -23,6 +26,9 @@ public class MainActivity extends Activity implements AddingTaskDialogFragment.A
 
     FragmentManager fragmentManager;
     PreferenceHelper preferenceHelper;
+    TabAdapter tabAdapter;
+    CurrentTaskFragment currentTaskFragment;
+    DoneTaskFragment doneTaskFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +93,7 @@ public class MainActivity extends Activity implements AddingTaskDialogFragment.A
         tabLayout.addTab(tabLayout.newTab().setText(R.string.done_task));
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        TabAdapter tabAdapter = new TabAdapter(fragmentManager, 2);
+        tabAdapter = new TabAdapter(fragmentManager, 2);
 
         viewPager.setAdapter(tabAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -109,6 +115,9 @@ public class MainActivity extends Activity implements AddingTaskDialogFragment.A
             }
         });
 
+        currentTaskFragment = (CurrentTaskFragment) tabAdapter.getItem(TabAdapter.CURRENT_TASK_FRAGMENT_POSITION);
+        doneTaskFragment = (DoneTaskFragment) tabAdapter.getItem(TabAdapter.DONE_TASK_FRAGMENT_POSITION);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,8 +130,9 @@ public class MainActivity extends Activity implements AddingTaskDialogFragment.A
     }
 
     @Override
-    public void onTaskAdded() {
+    public void onTaskAdded(ModelTask newTask) {
         Toast.makeText(this, "Task added.",Toast.LENGTH_LONG).show();
+        currentTaskFragment.addTask(newTask);
     }
 
     @Override
