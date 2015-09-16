@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="56dp"
+    xmlns:andriod="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     android:clickable="true"
     android:background="?android:attr/selectableItemBackground">
 
@@ -12,7 +14,7 @@
         android:textSize="16sp"
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="72dp"
         android:layout_toLeftOf="@+id/tvTaskDate"
         android:layout_toStartOf="@+id/tvTaskDate"
         />
@@ -27,5 +29,13 @@
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
         />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/rvTaskPriority"
+        app:src="@color/colorPrimary"
+        app:layout_marginLeft="16dp"
+        app:layout_marginTop="8dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
 
 </RelativeLayout>

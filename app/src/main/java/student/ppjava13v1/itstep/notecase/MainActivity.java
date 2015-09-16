@@ -18,17 +18,21 @@ import student.ppjava13v1.itstep.notecase.dialog.AddingTaskDialogFragment;
 import student.ppjava13v1.itstep.notecase.fragments.CurrentTaskFragment;
 import student.ppjava13v1.itstep.notecase.fragments.DoneTaskFragment;
 import student.ppjava13v1.itstep.notecase.fragments.SplashFragment;
+import student.ppjava13v1.itstep.notecase.fragments.TaskFragment;
 import student.ppjava13v1.itstep.notecase.model.ModelTask;
 
 
-public class MainActivity extends Activity implements AddingTaskDialogFragment.AddingTaskListener {
+public class MainActivity extends Activity
+        implements AddingTaskDialogFragment.AddingTaskListener ,
+        CurrentTaskFragment.OnTaskDoneListener,
+        DoneTaskFragment.OnTaskRestoreListener{
 
 
     FragmentManager fragmentManager;
     PreferenceHelper preferenceHelper;
     TabAdapter tabAdapter;
-    CurrentTaskFragment currentTaskFragment;
-    DoneTaskFragment doneTaskFragment;
+    TaskFragment currentTaskFragment;
+    TaskFragment doneTaskFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,5 +142,15 @@ public class MainActivity extends Activity implements AddingTaskDialogFragment.A
     @Override
     public void onTaskAddingCancel() {
         Toast.makeText(this, "Task adding cencel.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onTaskDone(ModelTask task) {
+        doneTaskFragment.addTask(task);
+    }
+
+    @Override
+    public void onTaskRestore(ModelTask task) {
+        currentTaskFragment.addTask(task);
     }
 }
