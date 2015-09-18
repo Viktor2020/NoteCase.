@@ -10,8 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import student.ppjava13v1.itstep.notecase.R;
 import student.ppjava13v1.itstep.notecase.adapter.CurrentTasksAdapter;
+import student.ppjava13v1.itstep.notecase.database.DBHelper;
 import student.ppjava13v1.itstep.notecase.model.ModelTask;
 
 
@@ -54,6 +58,20 @@ public class CurrentTaskFragment extends TaskFragment {
         recyclerView.setAdapter(adapter);
 
         return rootView;
+    }
+
+    @Override
+    public void addTaskFromDB() {
+
+        List<ModelTask> tasks = new ArrayList<>();
+        tasks.addAll(activity.dbHelper.query().getTasks(DBHelper.SELECTION_STATUS + " OR "
+                + DBHelper.SELECTION_STATUS,
+                new String[]{Integer.toString(ModelTask.STATUS_CURRENT),
+                Integer.toString(ModelTask.STATUS_OVERDUE)}, DBHelper.TASK_DATE_COLUMN));
+        for (int i = 0; i < tasks.size(); ++i) {
+            addTask(tasks.get(i), false);
+        }
+
     }
 
     @Override

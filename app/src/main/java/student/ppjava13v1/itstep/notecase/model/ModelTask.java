@@ -1,5 +1,7 @@
 package student.ppjava13v1.itstep.notecase.model;
 
+import java.util.Date;
+
 import student.ppjava13v1.itstep.notecase.R;
 
 public class ModelTask implements Item{
@@ -17,18 +19,29 @@ public class ModelTask implements Item{
     private int priority;
     private int status;
     private String title;
+    private long timeStamp;
 
     private long date;
 
     public ModelTask() {
         status = -1;
+        timeStamp = new Date().getTime();
     }
 
-    public ModelTask(int priority, int status, String title, long date) {
+    public ModelTask(int priority, int status, String title, long timeStamp, long date) {
         this.priority = priority;
         this.status = status;
         this.title = title;
+        this.timeStamp = timeStamp;
         this.date = date;
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public int getPriorityColor(){

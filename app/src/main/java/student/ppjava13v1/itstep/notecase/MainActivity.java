@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import student.ppjava13v1.itstep.notecase.adapter.TabAdapter;
+import student.ppjava13v1.itstep.notecase.database.DBHelper;
 import student.ppjava13v1.itstep.notecase.dialog.AddingTaskDialogFragment;
 import student.ppjava13v1.itstep.notecase.fragments.CurrentTaskFragment;
 import student.ppjava13v1.itstep.notecase.fragments.DoneTaskFragment;
@@ -34,12 +35,17 @@ public class MainActivity extends Activity
     TaskFragment currentTaskFragment;
     TaskFragment doneTaskFragment;
 
+    public DBHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         PreferenceHelper.getInstance().init(getApplicationContext());
         preferenceHelper = PreferenceHelper.getInstance();
+
+        dbHelper = new DBHelper(getApplicationContext());
 
         fragmentManager = getFragmentManager();
 
@@ -136,7 +142,7 @@ public class MainActivity extends Activity
     @Override
     public void onTaskAdded(ModelTask newTask) {
         Toast.makeText(this, "Task added.",Toast.LENGTH_LONG).show();
-        currentTaskFragment.addTask(newTask);
+        currentTaskFragment.addTask(newTask, true);
     }
 
     @Override
@@ -146,11 +152,11 @@ public class MainActivity extends Activity
 
     @Override
     public void onTaskDone(ModelTask task) {
-        doneTaskFragment.addTask(task);
+        doneTaskFragment.addTask(task, false);
     }
 
     @Override
     public void onTaskRestore(ModelTask task) {
-        currentTaskFragment.addTask(task);
+        currentTaskFragment.addTask(task, false);
     }
 }
