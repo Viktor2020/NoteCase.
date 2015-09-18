@@ -31,6 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + TASK_TIME_STAMP_COLUMN + " LONG );";
 
     public static final String SELECTION_STATUS = DBHelper.TASK_STATUS_COLUMN + " = ?";
+    public static final String SELECTION_TIME_STAMP = DBHelper.TASK_TIME_STAMP_COLUMN + " = ?";
 
     private DBQueryManager dbQueryManager;
     private DBUpdateManager dbUpdateManager;
@@ -72,5 +73,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBUpdateManager update() {
         return dbUpdateManager;
+    }
+
+    public void removeTask(long timeStamp) {
+        getWritableDatabase().delete(TASKS_TABLE, SELECTION_TIME_STAMP,
+                new String[]{Long.toString(timeStamp)});
     }
 }
