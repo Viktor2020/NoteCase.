@@ -55,6 +55,7 @@ public class DoneTaskAdapter extends TaskAdapter {
             }
 
             itemView.setVisibility(View.VISIBLE);
+            taskViewHolder.priority.setEnabled(true);
 
             itemView.setBackgroundColor(resources.getColor(R.color.gray_200));
 
@@ -81,6 +82,7 @@ public class DoneTaskAdapter extends TaskAdapter {
             taskViewHolder.priority.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    taskViewHolder.priority.setEnabled(false);
                     task.setStatus(ModelTask.STATUS_CURRENT);
 
                     getTaskFragment().activity.dbHelper.update().status(task.getTimeStamp(), task.getStatus());
